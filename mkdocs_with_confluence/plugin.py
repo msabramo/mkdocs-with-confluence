@@ -380,7 +380,10 @@ class MkdocsWithConfluence(BasePlugin):
     def __get_section_name(self, section):
         if self.config["debug"]:
             print(f"DEBUG    - SECTION name: {section}")
-        return os.path.basename(re.search("url='(.*)'\\/", section).group(1)[:-1])
+        try:
+            return os.path.basename(re.search("url='(.*)'\\/", section).group(1)[:-1])
+        except AttributeError:
+            pass
 
     def __get_section_title(self, section):
         if self.config["debug"]:
